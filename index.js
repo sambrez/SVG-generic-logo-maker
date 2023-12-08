@@ -1,7 +1,30 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const shapes = require('./library/shapes.js');
-const generateSVG = require('./library/generateSVG.js');
+const {Circle, Square, Triangle} = require('./library/shapes.js');
+
+function generateSVG(data) {
+    
+    const characters = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.textColor}">${data.text}</text>`
+
+    function chosenShape (shape) {
+        if (shape === 'Circle') {
+            const circle = new Circle;
+            return circle.render();
+        } else if (shape === 'Square') {
+            const square = new Square;
+            return square.render();
+        } else {
+            const triangle = new Triangle;
+            return triangle.render();
+        }
+    }
+
+    // const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${characters}</svg>`;
+    const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${chosenShape()}</svg>`;
+    // const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200"><g${chosenShape()}${characters}></g></svg>`;
+    
+    return svg;
+}
 
 const questions = [
     {
@@ -20,28 +43,51 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'text-color',
+        name: 'textColor',
         message: 'Enter a text color.',
-        default: '[white]',
+        validate: function(textColor) {
+            if (textColor.length >= 1) {
+                return true;
+            } else {
+                return 'Error: please set a text color';
+                
+            }
+        }
     },
     {
         type: 'checkbox',
         name: 'shape',
         message: 'Choose the shape of your logo.',
-        default: '[Circle]',
         choices: [
             'Circle',
             'Square',
             'Triangle',
         ],
+        validate: function(shape) {
+            if (shape.length < 1) {
+                return 'Error: please select a shape';
+            } else if (shape.length > 1) {
+                return 'Error: Only one shape can be selected'
+            } else {
+                return true;   
+            }
+        }
     },
     {
         type: 'input',
-        name: 'shape-color',
+        name: 'shapeColor',
         message: 'Enter a shape color.',
-        default: '[green]',
+        validate: function(shapeColor) {
+            if (shapeColor.length >= 1) {
+                return true;
+            } else {
+                return 'Error: please set a shape color';
+                
+            }
+        }
     },
 ];
+
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, error => {
