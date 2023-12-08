@@ -7,7 +7,7 @@ const questions = [
     {
         type: 'input',
         name: 'text',
-        message: '',
+        message: 'Enter up to three characters to display in our logo.',
         validate: function(text) {
             if (text.length > 3) {
                 return 'Error: Too many characters.';
@@ -21,13 +21,13 @@ const questions = [
     {
         type: 'input',
         name: 'text-color',
-        message: '',
+        message: 'Enter a text color.',
         default: '[white]',
     },
     {
         type: 'checkbox',
         name: 'shape',
-        message: '',
+        message: 'Choose the shape of your logo.',
         default: '[Circle]',
         choices: [
             'Circle',
@@ -38,7 +38,34 @@ const questions = [
     {
         type: 'input',
         name: 'shape-color',
-        message: '',
+        message: 'Enter a shape color.',
         default: '[green]',
     },
 ];
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, error => {
+        if (error) {
+            return console.log(error);
+        }
+
+        console.log('Generated logo.svg');
+    });
+}
+
+function init() {
+    inquirer
+        .prompt(questions)
+        .then(data => {
+            const logoData = generateSVG(data);
+            writeToFile('logo.svg', logoData);
+        })
+        .catch((error) => {
+            if (error) {
+                return console.log(error);
+            }
+        });
+};
+
+// Function call
+init();

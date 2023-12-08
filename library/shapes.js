@@ -1,37 +1,29 @@
 class Shapes {
     constructor(color) {
-        this.color = color;
+        this.color = '';
+    }
+
+    chosenColor(color) {
+        this.color = (color);
     }
 }
 
 class Circle extends Shapes {
-    constructor(color) {
-        super(color);
-    }
-
     render() {
-
+        return '<>';
     }
 }
 
 class Square extends Shapes {
-    constructor(color) {
-        super(color);
-    }
-
     render() {
-        
+        return '<>'; 
     }
 }
 
 class Triangle extends Shapes {
-    constructor(color) {
-        super(color);
-    }
-
     render() {
-        
+        return '<>';
     }
 }
 
-// module.exports = Shapes;
+module.exports = [Circle, Square, Triangle];

@@ -1,4 +1,4 @@
-const Shapes = require('./shapes.js');
+const shapes = require('./shapes.js');
 
 describe('Shapes', () => {
 
