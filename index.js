@@ -4,24 +4,27 @@ const {Circle, Square, Triangle} = require('./library/shapes.js');
 
 function generateSVG(data) {
     
-    const characters = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.textColor}">${data.text}</text>`
+    const characters = `<text x="153" y="125" font-size="45" font-family="script" text-anchor="middle" text-align="center" fill="${data.textColor}">${data.text}</text>`;
 
-    function chosenShape (shape) {
-        if (shape === 'Circle') {
+    function chosenShape () {
+        if (data.shape[0] === 'Circle') {
             const circle = new Circle;
-            return circle.render();
-        } else if (shape === 'Square') {
+            const circleColor = circle.setColor(data.shapeColor);
+            return circle.render(circleColor);
+        } else if (data.shape[0] === 'Square') {
             const square = new Square;
-            return square.render();
+            const squareColor = square.setColor(data.shapeColor);
+            return square.render(squareColor);
         } else {
             const triangle = new Triangle;
-            return triangle.render();
+            const triangleColor = triangle.setColor(data.shapeColor);
+            return triangle.render(triangleColor);
         }
     }
 
     // const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${characters}</svg>`;
-    const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${chosenShape()}</svg>`;
-    // const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200"><g${chosenShape()}${characters}></g></svg>`;
+    // const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${chosenShape()}</svg>`;
+    const svg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${chosenShape()}${characters}</svg>`;
     
     return svg;
 }
@@ -103,6 +106,7 @@ function init() {
     inquirer
         .prompt(questions)
         .then(data => {
+            console.log(data);
             const logoData = generateSVG(data);
             writeToFile('logo.svg', logoData);
         })

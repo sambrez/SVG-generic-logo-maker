@@ -3,26 +3,26 @@ class Shapes {
         this.color = '';
     }
 
-    chosenColor(shapeColor) {
+    setColor(color) {
         this.color = color;
     }
 }
 
 class Circle extends Shapes {
     render() {
-        return `<circle cx="50%" cy="50%" r="100" height="75%" width="75%" fill="${this.color}"/>`;
+        return `<circle cx="50%" cy="53%" r="80" height="75%" width="75%" fill="${this.color}"/>`;
     }
 }
 
 class Square extends Shapes {
     render() {
-        return `<rect x="50" height="200" width="200" fill="${this.color}"/>`;
+        return `<rect x="71" y="25" height="160" width="160" fill="${this.color}"/>`;
     }
 }
 
 class Triangle extends Shapes {
     render() {
-        return `<polygon height="75%" width="75%" points="0,200 300,200 150,0" fill="${this.color}"/>`;
+        return `<polygon height="50%" width="50%" points="150, 5 240, 155 60, 155" fill="${this.color}"/>`;
     }
 }
 
