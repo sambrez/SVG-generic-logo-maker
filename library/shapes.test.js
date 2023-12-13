@@ -16,7 +16,7 @@ describe('Shapes', () => {
     });
 
     describe('Square', () => {
-        it('should render a square with no color set', () => {
+        it('should render a square with no fill color set', () => {
             const square = new Square();
             const squareColor = square.setColor('');
             expect(square.render(squareColor)).toEqual('<rect x="71" y="25" height="160" width="160" fill=""/>');
@@ -29,15 +29,15 @@ describe('Shapes', () => {
     });
 
     describe('Triangle', () => {
-        it('should render a square with no color set', () => {
+        it('should render a square with no fill color set', () => {
             const triangle = new Triangle();
             const triangleColor = triangle.setColor('');
-            expect(triangle.render(triangleColor)).toEqual('<polygon height="50%" width="50%" points="150, 5 240, 155 60, 155" fill=""/>');
+            expect(triangle.render(triangleColor)).toEqual('<polygon height="50%" width="50%" points="150, 5 270, 155 40, 155" fill=""/>');
         });
         it('should display a blue triangle', () => {
             const triangle = new Triangle();
             const triangleColor = triangle.setColor('blue');
-            expect(triangle.render(triangleColor)).toEqual('<polygon height="50%" width="50%" points="150, 5 240, 155 60, 155" fill="blue"/>');
+            expect(triangle.render(triangleColor)).toEqual('<polygon height="50%" width="50%" points="150, 5 270, 155 40, 155" fill="blue"/>');
         });
     });
 });

@@ -3,6 +3,7 @@ class Shapes {
         this.color = '';
     }
 
+        // establishes the color of the Shapes class
     setColor(color) {
         this.color = color;
     }
@@ -22,8 +23,9 @@ class Square extends Shapes {
 
 class Triangle extends Shapes {
     render() {
-        return `<polygon height="50%" width="50%" points="150, 5 240, 155 60, 155" fill="${this.color}"/>`;
+        return `<polygon height="50%" width="50%" points="150, 5 270, 155 40, 155" fill="${this.color}"/>`;
     }
 }
 
+// exports out the Circle, Square, and Triangle classes
 module.exports = {Circle, Square, Triangle};
